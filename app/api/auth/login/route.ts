@@ -16,7 +16,6 @@ export async function GET() {
   const state = crypto.randomBytes(16).toString('hex');
   console.log(`Generated state: ${state}`);
 
-  // FIX: Await the cookies() function
   const cookieStore = await cookies();
   cookieStore.set('epic_code_verifier', codeVerifier, { httpOnly: true, path: '/' });
   cookieStore.set('epic_state', state, { httpOnly: true, path: '/' });

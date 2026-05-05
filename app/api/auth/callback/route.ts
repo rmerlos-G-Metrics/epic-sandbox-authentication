@@ -11,23 +11,15 @@ import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
 export async function GET(request: Request) {
-    // =======================================================================
-    // STEP 1: EXTRACT URL PARAMETERS FROM EPIC'S REDIRECT
-    // =======================================================================
     const { searchParams } = new URL(request.url);
     const code = searchParams.get('code');
     const stateReturned = searchParams.get('state');
 
-    // =======================================================================
-    // STEP 2: RETRIEVE SAVED COOKIES
-    // =======================================================================
     const cookieStore = await cookies();
     const stateSaved = cookieStore.get('epic_state')?.value;
     const codeVerifier = cookieStore.get('epic_code_verifier')?.value;
 
-    // =======================================================================
-    // STEP 3: LOG & VERIFY STATE
-    // =======================================================================
+    // Verify state
     console.log('\n=== CALLBACK RECEIVED ===');
     console.log('Code from Epic URL:', code);
     console.log('State from Epic URL:', stateReturned);
@@ -64,9 +56,7 @@ export async function GET(request: Request) {
 
     const tokenData = await tokenResponse.json();
 
-    // =======================================================================
-    // STEP 5: LOG THE TOKEN ENDPOINT RESPONSE
-    // =======================================================================
+    // Endpoint Response
     console.log('\n=== TOKEN ENDPOINT RESPONSE ===');
     console.log(tokenData);
     console.log('===============================\n');
