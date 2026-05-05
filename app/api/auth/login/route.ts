@@ -26,7 +26,7 @@ export async function GET() {
   authUrl.searchParams.append('client_id', process.env.EPIC_CLIENT_ID || ''); 
   authUrl.searchParams.append('scope', 'launch/patient openid fhirUser patient/Patient.read patient/Condition.read');
   authUrl.searchParams.append('response_type', 'code');
-  authUrl.searchParams.append('redirect_uri', 'https://localhost:3000/api/auth/callback'); 
+  authUrl.searchParams.append('redirect_uri', 'http://localhost:3000/api/auth/callback'); 
   authUrl.searchParams.append('state', state);
   authUrl.searchParams.append('code_challenge_method', 'S256');
   authUrl.searchParams.append('code_challenge', codeChallenge);
